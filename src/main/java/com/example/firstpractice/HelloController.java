@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    private final HelloService helloService;
+    private final GreetingProperties greetingProperties;
 
-    public HelloController(HelloService helloService) {
-        this.helloService = helloService;
+    public HelloController(GreetingProperties greetingProperties) {
+        this.greetingProperties = greetingProperties;
     }
 
     @GetMapping("/hello")
     public String sayHello() {
-        return helloService.generateGreeting("Amir");
+        return greetingProperties.getMessage() + " (Author: " + greetingProperties.getAuthor() + ")";
     }
 }
