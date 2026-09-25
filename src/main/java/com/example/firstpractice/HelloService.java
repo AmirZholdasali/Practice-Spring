@@ -5,7 +5,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloService {
 
-    public String generateGreeting(String name) {
-        return "Hello, " + name + "! Это мой первый REST endpoint.";
+    private final GreetingProperties greetingProperties;
+    private final GreetingFormatter greetingFormatter;
+
+    public HelloService(GreetingProperties greetingProperties, GreetingFormatter greetingFormatter) {
+        this.greetingProperties = greetingProperties;
+        this.greetingFormatter = greetingFormatter;
+    }
+
+    public String greet() {
+        return greetingFormatter.format(greetingProperties.getMessage(), greetingProperties.getAuthor());
     }
 }
