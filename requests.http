@@ -1,0 +1,38 @@
+### 1. Создать книгу -> 201
+POST http://localhost:8081/books
+Content-Type: application/json
+
+{"title": "Dune", "pages": 412}
+
+### 2. Все книги -> 200
+GET http://localhost:8081/books
+
+### 3. Одна книга -> 200
+GET http://localhost:8081/books/1
+
+### 4. Обновить книгу -> 200
+PUT http://localhost:8081/books/1
+Content-Type: application/json
+
+{"title": "Dune (2nd edition)", "pages": 450}
+
+### 5. Ошибка: пустое название -> 400
+POST http://localhost:8081/books
+Content-Type: application/json
+
+{"title": "", "pages": 0}
+
+### 6. Ошибка: нет такой книги -> 404
+GET http://localhost:8081/books/99
+
+### 7. Ошибка: обновить несуществующую -> 404
+PUT http://localhost:8081/books/99
+Content-Type: application/json
+
+{"title": "Ghost", "pages": 10}
+
+### 8. Удалить -> 204
+DELETE http://localhost:8081/books/1
+
+### 9. Ошибка: удалить повторно -> 404
+DELETE http://localhost:8081/books/1
