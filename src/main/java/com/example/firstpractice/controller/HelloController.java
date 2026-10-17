@@ -1,5 +1,6 @@
-package com.example.firstpractice;
+package com.example.firstpractice.controller;
 
+import com.example.firstpractice.service.HelloService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

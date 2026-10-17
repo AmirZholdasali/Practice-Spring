@@ -1,5 +1,7 @@
 package com.example.firstpractice;
 
+import com.example.firstpractice.config.GreetingProperties;
+import com.example.firstpractice.service.HelloService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

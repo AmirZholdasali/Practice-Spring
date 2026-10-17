@@ -1,4 +1,4 @@
-package com.example.firstpractice;
+package com.example.firstpractice.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

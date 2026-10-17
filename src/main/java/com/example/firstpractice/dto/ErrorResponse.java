@@ -1,4 +1,4 @@
-package com.example.firstpractice;
+package com.example.firstpractice.dto;
 
 import java.time.Instant;
 

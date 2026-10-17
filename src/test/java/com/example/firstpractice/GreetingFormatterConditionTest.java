@@ -1,5 +1,8 @@
 package com.example.firstpractice;
 
+import com.example.firstpractice.formatter.FormalGreetingFormatter;
+import com.example.firstpractice.formatter.GreetingFormatter;
+import com.example.firstpractice.formatter.SimpleGreetingFormatter;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 

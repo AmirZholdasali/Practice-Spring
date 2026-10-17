@@ -1,4 +1,4 @@
-package com.example.firstpractice;
+package com.example.firstpractice.formatter;
 
 
 public interface GreetingFormatter {

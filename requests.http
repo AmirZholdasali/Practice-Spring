@@ -36,3 +36,18 @@ DELETE http://localhost:8081/books/1
 
 ### 9. Ошибка: удалить повторно -> 404
 DELETE http://localhost:8081/books/1
+
+### Создать книгу -> 201
+POST http://localhost:8081/books
+Content-Type: application/json
+
+{"title": "Test", "pages": 100}
+
+### Первая страница, 3 книги -> 200
+GET http://localhost:8081/books?page=0&size=3
+
+### Вторая страница -> 200
+GET http://localhost:8081/books?page=1&size=3
+
+### Сортировка по названию -> 200
+GET http://localhost:8081/books?page=0&size=10&sort=title

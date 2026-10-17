@@ -1,12 +1,16 @@
-package com.example.firstpractice;
+package com.example.firstpractice.controller;
 
+import com.example.firstpractice.dto.BookRequest;
+import com.example.firstpractice.dto.BookResponse;
+import com.example.firstpractice.service.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/books")
@@ -16,7 +20,9 @@ public class BookController {
     public BookController(BookService service) { this.service = service; }
 
     @GetMapping
-    public List<BookResponse> all() { return service.findAll(); }
+    public PagedModel<BookResponse> all(Pageable pageable) {
+        return new PagedModel<>(service.findAll(pageable));
+    }
 
     @GetMapping("/{id}")
     public BookResponse one(@PathVariable Long id) { return service.findById(id); }

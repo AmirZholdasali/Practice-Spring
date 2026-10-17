@@ -1,4 +1,4 @@
-package com.example.firstpractice;
+package com.example.firstpractice.formatter;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Primary;

@@ -1,5 +1,7 @@
-package com.example.firstpractice;
+package com.example.firstpractice.service;
 
+import com.example.firstpractice.formatter.GreetingFormatter;
+import com.example.firstpractice.config.GreetingProperties;
 import org.springframework.stereotype.Service;
 
 @Service

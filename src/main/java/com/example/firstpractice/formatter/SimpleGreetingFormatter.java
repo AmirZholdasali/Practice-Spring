@@ -1,4 +1,4 @@
-package com.example.firstpractice;
+package com.example.firstpractice.formatter;
 
 import org.springframework.stereotype.Component;
 
