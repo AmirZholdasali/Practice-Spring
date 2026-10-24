@@ -1,9 +1,9 @@
 package com.example.firstpractice.service;
 
-import com.example.firstpractice.dto.BookRequest;
-import com.example.firstpractice.dto.BookResponse;
+import com.example.firstpractice.domain.BookModel;
 import com.example.firstpractice.entity.Book;
 import com.example.firstpractice.exception.ResourceNotFoundException;
+import com.example.firstpractice.mapper.BookMapper;
 import com.example.firstpractice.repository.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,40 +13,41 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
     private final BookRepository repo;
+    private final BookMapper mapper;
 
-    public BookService(BookRepository repo) {
+    public BookService(BookRepository repo, BookMapper mapper) {
         this.repo = repo;
+        this.mapper = mapper;
     }
 
-    public Page<BookResponse> findAll(Pageable pageable) {
-        return repo.findAll(pageable).map(this::toResponse);
+    public Page<BookModel> findAll(Pageable pageable) {
+        return repo.findAll(pageable).map(mapper::fromEntity);
     }
 
-    public BookResponse findById(Long id) {
-        return repo.findById(id).map(this::toResponse)
-                .orElseThrow(() -> new ResourceNotFoundException("Book " + id + " not found"));
+    public BookModel findById(Long id) {
+        return repo.findById(id).map(mapper::fromEntity)
+                .orElseThrow(() -> notFound(id));
     }
 
-    public BookResponse create(BookRequest r) {
-        return toResponse(repo.save(new Book(r.title(), r.pages())));
+    public BookModel create(BookModel model) {
+        return mapper.fromEntity(repo.save(mapper.toEntity(model)));
     }
 
-    public BookResponse update(Long id, BookRequest r) {
-        Book book = repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Book " + id + " not found"));
-        book.setTitle(r.title());
-        book.setPages(r.pages());
-        return toResponse(repo.save(book));
+    public BookModel update(Long id, BookModel model) {
+        Book book = repo.findById(id).orElseThrow(() -> notFound(id));
+        book.setTitle(model.title());
+        book.setPages(model.pages());
+        return mapper.fromEntity(repo.save(book));
     }
 
     public void delete(Long id) {
         if (!repo.existsById(id)) {
-            throw new ResourceNotFoundException("Book " + id + " not found");
+            throw notFound(id);
         }
         repo.deleteById(id);
     }
 
-    private BookResponse toResponse(Book b) {
-        return new BookResponse(b.getId(), b.getTitle(), b.getPages());
+    private ResourceNotFoundException notFound(Long id) {
+        return new ResourceNotFoundException("Book " + id + " not found");
     }
 }

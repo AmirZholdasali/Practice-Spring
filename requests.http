@@ -41,7 +41,7 @@ DELETE http://localhost:8081/books/1
 POST http://localhost:8081/books
 Content-Type: application/json
 
-{"title": "Test", "pages": 100}
+{"title": "TestSIS2", "pages": 100}
 
 ### Первая страница, 3 книги -> 200
 GET http://localhost:8081/books?page=0&size=3
